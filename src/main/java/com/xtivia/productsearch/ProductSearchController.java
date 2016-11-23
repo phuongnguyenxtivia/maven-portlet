@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.xtivia.boostcamp.portlet.productsearch;
+package com.xtivia.productsearch;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
