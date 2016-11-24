@@ -8,9 +8,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.xtivia.boostcamp.dao.DAOFactory;
 import com.xtivia.boostcamp.dao.IProductDAO;
 import com.xtivia.boostcamp.domain.Product;
 import com.xtivia.boostcamp.service.IProductService;
@@ -22,25 +24,22 @@ import com.xtivia.boostcamp.service.IProductService;
 @Service("productService")
 public class ProductServiceImpl implements IProductService {
 	@Autowired
-	@Qualifier("inMemoryProductDAO")
+	@Qualifier("mySQLProductDAO")
 	private IProductDAO productDAO;
 	
-	public ProductServiceImpl() {
-		
-	}
-	
-	public ProductServiceImpl(IProductDAO productDAO) {
-		this.productDAO = productDAO;
-	}
+//	@Autowired
+//	public ProductServiceImpl(@Value("${project.repository.level}") final int repoLevel) {
+//		productDAO = DAOFactory.getDAOFactory(repoLevel).getProductDAO();
+//	}
 	
 	@Override
 	public List<Product> getList() {
-		return productDAO.getList();
+		return productDAO.findAll();
 	}
 
 	@Override
 	public Product get(String key) {
-		return productDAO.get(key);
+		return productDAO.findOne(key);
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public void delete(String key) {
-		productDAO.delete(key);
+		productDAO.deleteById(key);
 	}
 
 	@Override

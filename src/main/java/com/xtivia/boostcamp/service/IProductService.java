@@ -7,5 +7,4 @@ import com.xtivia.boostcamp.domain.Product;
  *
  */
 public interface IProductService extends IBaseService<Product, String> {
-	
 }

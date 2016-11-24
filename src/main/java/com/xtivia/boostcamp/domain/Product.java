@@ -6,20 +6,38 @@ package com.xtivia.boostcamp.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 /**
  * @author pnguyen
  *
  */
+@Entity
+@Table(name = "BOOST_PRODUCT")
 public class Product implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2808840093928711003L;
 	
-	protected String id;
-	protected String name;
-	protected int quantity;
-	protected BigDecimal unitPrice;
+	@Id
+	@Column(name = "PROD_ID", nullable = false, length = 10)
+	protected String id = "";
+	
+	@Column(name = "PROD_NAME", nullable = false, length = 20)
+	protected String name = "";
+	
+	@Column(name = "PROD_QUANTITY", nullable = false, length = 6)
+	protected int quantity = 0;
+	
+	@Column(name = "PROD_UNIT_PRICE", nullable = false, precision=8, scale=2)
+	protected BigDecimal unitPrice = new BigDecimal(0.00);
+	
+	@Column(name = "PROD_DESCRIPTION", nullable = true, length = 300)
 	protected String description;
 	
 	public Product() {

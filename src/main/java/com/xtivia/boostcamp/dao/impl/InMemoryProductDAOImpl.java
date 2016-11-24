@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
 
 import com.xtivia.boostcamp.dao.IProductDAO;
@@ -32,12 +33,12 @@ public class InMemoryProductDAOImpl implements IProductDAO {
 	}
 
 	@Override
-	public List<Product> getList() {
+	public List<Product> findAll() {
 		return products;
 	}
 
 	@Override
-	public Product get(String key) {
+	public Product findOne(String key) {
         Product entity = null;
 
         for (Product product : products) {
@@ -76,19 +77,14 @@ public class InMemoryProductDAOImpl implements IProductDAO {
 	}
 
 	@Override
-	public void delete(String key) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId().equals(key)) {
-            	products.remove(i);
-            }
-        }
+	public void delete(Product entity) {
+		deleteById(entity.getId());
 	}
 	
     private String getNewId() {
         return String.valueOf(Integer.parseInt(products.get(products.size() - 1).getId()) + 1);
     }
 
-	@Override
 	public List<Product> getListByKey(String key) {
 		List<Product> list = new ArrayList<Product>(); 
 
@@ -99,5 +95,19 @@ public class InMemoryProductDAOImpl implements IProductDAO {
         }
 
         return list;
+	}
+
+	@Override
+	public void save(Product entity) {
+		update(entity);
+	}
+
+	@Override
+	public void deleteById(String key) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId().equals(key)) {
+            	products.remove(i);
+            }
+        }
 	}
 }
