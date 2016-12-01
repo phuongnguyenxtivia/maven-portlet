@@ -8,7 +8,7 @@
 		
 		<aui:form cssClass="form-inline" id="frm_searchProd" action="${searchProductAU}" method="post">
 			<c:set var="lbl_prodId"><liferay-ui:message key="prod.id"/></c:set>
-			<aui:input type="text" name="prodId" />
+			<aui:input type="text" name="prodId" label="${lbl_prodId}"/>
 			<button type="submit" class="btn btn-primary"><liferay-ui:message key="frm.btnSearch"/></button>	
 		</aui:form>
 	</div>
